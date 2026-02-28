@@ -82,5 +82,20 @@ class PlayerList:
         if next_node is not None:
             next_node.set_previous(previous_node)
 
+    def display(self, forward=True):
+        if self.is_empty:
+            print("List is empty")
+            return
+        if forward:
+            pointer = self._head
+            while pointer is not None:
+                print(pointer)
+                pointer = pointer.next_player
+        else:
+            pointer = self._tail
+            while pointer is not None:
+                print(pointer)
+                pointer = pointer.previous_player
+
 
 
