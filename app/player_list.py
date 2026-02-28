@@ -1,3 +1,4 @@
+
 from player_node import PlayerNode
 
 
@@ -29,3 +30,23 @@ class PlayerList:
             self._head.set_previous(new_node)
             new_node.set_next(self._head)
             self._head = new_node
+
+
+    def delete_head(self):
+        if self.is_empty:
+            raise Exception("List is empty.")
+        if self._head.next_player is None:
+            self._head = self._tail = None
+        else:
+            self._head = self._head.next_player
+            self._head.set_previous(None)
+
+
+    def delete_tail(self):
+        if self.is_empty:
+            raise Exception("List is empty")
+        if self._head.next_player is None:
+            self._head = self._tail = None
+        else:
+            self._tail = self._tail.previous_player
+            self._tail.set_next(None)
