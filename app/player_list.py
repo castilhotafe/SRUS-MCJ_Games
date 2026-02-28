@@ -4,19 +4,18 @@ from player_node import PlayerNode
 class PlayerList:
     def __init__(self):
         self._head = None
+        self._tail = None
 
 
     @property
     def is_empty(self):
-        return self._head is None
+        return self._head is None and self._tail is None
 
     def append(self, data):
-        new_player = PlayerNode(data)
+        new_node = PlayerNode(data)
         if self.is_empty:
-            self._head = new_player
+            self._head = self._tail= new_node
         else:
-            pointer = self._head
-            while pointer.next_player:
-                pointer = pointer.next_player
-            pointer.set_next(new_player)
-            new_player.set_previous(pointer)
+            self._tail.set_next(new_node)
+            new_node.set_previous(self._tail)
+            self._tail = new_node

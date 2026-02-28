@@ -23,3 +23,6 @@ class TestPlayerList(unittest.TestCase):
         self.my_list.append(self.my_player_00)
         self.my_list.append(self.my_player_01)
         self.assertIsNotNone(self.my_list._head.next_player)
+        self.assertIsNone(self.my_list._tail.next_player)
+
+
