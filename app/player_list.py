@@ -19,3 +19,13 @@ class PlayerList:
             self._tail.set_next(new_node)
             new_node.set_previous(self._tail)
             self._tail = new_node
+
+
+    def prepend(self, data):
+        new_node = PlayerNode(data)
+        if self.is_empty:
+            self._head = self._tail = new_node
+        else:
+            self._head.set_previous(new_node)
+            new_node.set_next(self._head)
+            self._head = new_node

@@ -1,5 +1,5 @@
 import unittest
-from app.player_list import PlayerList
+from player_list import PlayerList
 from player import Player
 
 
@@ -26,3 +26,8 @@ class TestPlayerList(unittest.TestCase):
         self.assertIsNone(self.my_list._tail.next_player)
 
 
+    def test_prepend_head_previous_is_none(self):
+        self.my_list.prepend(self.my_player_00)
+        self.my_list.prepend(self.my_player_01)
+        self.assertEqual(self.my_list._head.next_player.player, self.my_player_00)
+        self.assertIsNone(self.my_list._head._previous)
