@@ -7,6 +7,7 @@ class TestPlayerList(unittest.TestCase):
     def setUp(self):
         self.my_player_00 = Player('1', 'Marcos')
         self.my_player_01 = Player('2', 'Socram')
+        self.my_player_02 = Player('3', 'Cosmar')
         self.my_list = PlayerList()
         self.my_list_test_delete = PlayerList()
         self.my_list_test_delete.append(self.my_player_00)
@@ -47,3 +48,13 @@ class TestPlayerList(unittest.TestCase):
         self.assertIsNone(self.my_list_test_delete._tail.next_player)
         self.assertEqual(self.my_list_test_delete._head, self.my_list_test_delete._tail)
         self.assertEqual(self.my_list_test_delete._tail.player, self.my_player_00)
+
+    def test_delete_key(self):
+        self.my_list_test_delete.append(self.my_player_02)
+        self.my_list_test_delete.delete_key('2')
+        self.assertEqual(self.my_list_test_delete._head.player, self.my_player_00)
+        self.assertEqual(self.my_list_test_delete._tail.player, self.my_player_02)
+        self.assertEqual(self.my_list_test_delete._head.next_player.player, self.my_player_02)
+        self.assertIsNone(self.my_list_test_delete._head.previous_player)
+        self.assertEqual(self.my_list_test_delete._tail.previous_player.player, self.my_player_00)
+        self.assertIsNone(self.my_list_test_delete._tail.next_player)

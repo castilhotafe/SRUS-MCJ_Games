@@ -50,3 +50,37 @@ class PlayerList:
         else:
             self._tail = self._tail.previous_player
             self._tail.set_next(None)
+
+    def delete_key(self, key):
+        if self.is_empty:
+            raise Exception("List is empty")
+
+        if self._head.next_player is None:
+            if self._head.player.uid == key:
+                self._head = None
+                self._tail = None
+                return
+            raise Exception("Key not found")
+
+        if self._head.player.uid == key:
+            self.delete_head()
+            return
+
+        if self._tail.player.uid == key:
+            self.delete_tail()
+            return
+
+        pointer = self._head.next_player
+        while pointer is not None and pointer.player.uid != key:
+            pointer = pointer.next_player
+        if pointer is None:
+            raise Exception("Key not found")
+
+        previous_node = pointer.previous_player
+        next_node = pointer.next_player
+        previous_node.set_next(next_node)
+        if next_node is not None:
+            next_node.set_previous(previous_node)
+
+
+
