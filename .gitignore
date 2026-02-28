@@ -11,6 +11,7 @@
 pyvenv.cfg
 .venv
 pip-selfcheck.json
+.venv/
 
 ### Windows template
 # Windows thumbnail cache files
@@ -41,6 +42,7 @@ $RECYCLE.BIN/
 ### macOS template
 # General
 .DS_Store
+.DS_Store/
 .AppleDouble
 .LSOverride
 
