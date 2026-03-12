@@ -2,9 +2,13 @@
 Represents a Player entity with unique identifier and name attributes.
 
 This class provides functionality to represent basic details of a
-player, including a unique identifier and name. The attributes are
-accessible via read-only properties.
+player, including a unique identifier and name.
+
+References:
+    https://docs.python.org/3/library/functions.html#property
 """
+
+
 class Player:
     """
     Represents a player with a unique identifier and a name.
@@ -21,6 +25,7 @@ class Player:
     name : str
         The name of the player.
     """
+
     def __init__(self, uid: str, name: str):
         self._uid = uid
         self._name = name
@@ -33,6 +38,24 @@ class Player:
     def name(self):
         return self._name
 
+    # I have looked up this syntax using python documentation for @property
+    # The reference URL is included in the module docstring
+    @name.setter
+    def name(self, new_name: str):
+        self._name = new_name
+
+    @classmethod
+    def hash(cls, key: str) -> int:
+        total_value: int = 0
+        for char in key:
+            total_value += ord(char)
+        return total_value
+
+    def __hash__(self):
+        return self.hash(self.uid)
+
+    def __eq__(self, other):
+        return self.uid == other.uid
 
     def __str__(self):
         return f'Player id: {self.uid}\n Name: {self.name}'

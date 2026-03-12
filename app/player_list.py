@@ -9,6 +9,7 @@ The PlayerList operates as a dynamic data structure suitable for representing se
 with efficient insertions and deletions.
 """
 from app.player_node import PlayerNode
+from app.player import Player
 
 
 class PlayerList:
@@ -24,10 +25,10 @@ class PlayerList:
     is_empty : bool
         Indicates whether the list is empty.
     """
+
     def __init__(self):
         self._head = None
         self._tail = None
-
 
     @property
     def is_empty(self):
@@ -52,13 +53,12 @@ class PlayerList:
         """
         new_node = PlayerNode(data)
         if self.is_empty:
-            self._head = self._tail= new_node
+            self._head = self._tail = new_node
         else:
-            self._tail.set_next(new_node)# Current tail gives its hand to the new node
-            new_node.set_previous(self._tail)# New node recognizes who was holding the end of the list
+            self._tail.set_next(new_node)  # Current tail gives its hand to the new node
+            new_node.set_previous(self._tail)  # New node recognizes who was holding the end of the list
             # Move the tail pointer so the list still knows its last element
             self._tail = new_node
-
 
     def prepend(self, data):
         """
@@ -75,11 +75,10 @@ class PlayerList:
         if self.is_empty:
             self._head = self._tail = new_node
         else:
-            self._head.set_previous(new_node)# Old head gives hand back to new node
-            new_node.set_next(self._head)#new node gives front hand to the head node
-            #head points to the new node
+            self._head.set_previous(new_node)  # Old head gives hand back to new node
+            new_node.set_next(self._head)  # new node gives front hand to the head node
+            # head points to the new node
             self._head = new_node
-
 
     def delete_head(self):
         """
@@ -101,7 +100,6 @@ class PlayerList:
             self._head = self._head.next_player
             self._head.set_previous(None)
 
-
     def delete_tail(self):
         """
         Deletes the tail element from the list.
@@ -121,9 +119,8 @@ class PlayerList:
         if self._head.next_player is None:
             self._head = self._tail = None
         else:
-            self._tail = self._tail.previous_player #Update pointer to previous node
-            self._tail.set_next(None) # let go the old tail
-
+            self._tail = self._tail.previous_player  # Update pointer to previous node
+            self._tail.set_next(None)  # let go the old tail
 
     def delete_key(self, key):
         """
@@ -198,5 +195,25 @@ class PlayerList:
                 print(pointer)
                 pointer = pointer.previous_player
 
+    def find_key(self, key: str) -> Player | None:
+        if self.is_empty:
+            return None
 
+        pointer = self._head
+        while pointer is not None:
+            if pointer.player.uid == key:
+                return pointer.player
+            pointer = pointer.next_player
 
+        return None
+
+    def __len__(self):
+        list_player_count = 0
+        if self.is_empty:
+            return list_player_count
+        pointer = self._head
+        while pointer is not None:
+            list_player_count += 1
+            pointer = pointer.next_player
+
+        return list_player_count
