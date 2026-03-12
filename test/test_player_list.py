@@ -13,8 +13,8 @@ TestPlayerList : unittest.TestCase
     Contains unit tests for the PlayerList class.
 """
 import unittest
-from player_list import PlayerList
-from player import Player
+from app.player_list import PlayerList
+from app.player import Player
 
 
 class TestPlayerList(unittest.TestCase):

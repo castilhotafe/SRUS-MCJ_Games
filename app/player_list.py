@@ -8,7 +8,7 @@ forward and reverse directions.
 The PlayerList operates as a dynamic data structure suitable for representing sequential data
 with efficient insertions and deletions.
 """
-from player_node import PlayerNode
+from app.player_node import PlayerNode
 
 
 class PlayerList:
