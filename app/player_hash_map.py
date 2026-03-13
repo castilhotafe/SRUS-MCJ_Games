@@ -149,10 +149,6 @@ class PlayerHashMap:
         Iterates through the hashmap to locate all non-empty lists of players and
         displays their contents. Each list is prefixed by its index in the hashmap.
 
-        Raises
-        ------
-        AttributeError
-            If `hashmap` or any associated operations are not properly defined.
         """
         for index, player_list in enumerate(self.hashmap):
             if not player_list.is_empty:
