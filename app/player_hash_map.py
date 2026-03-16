@@ -25,6 +25,7 @@ class PlayerHashMap:
     hashmap : list of PlayerList
         The core structure of the PlayerHashMap, which consists of multiple PlayerList objects to store players.
     """
+
     def __init__(self):
         self.__SIZE: int = 10
         self.hashmap = []

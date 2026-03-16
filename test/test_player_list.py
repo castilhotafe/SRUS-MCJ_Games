@@ -48,15 +48,12 @@ class TestPlayerList(unittest.TestCase):
         self.my_list_test_delete.append(self.my_player_00)
         self.my_list_test_delete.append(self.my_player_01)
 
-
     def test_is_empty(self):
         self.assertEqual(self.my_list.is_empty, True)
-
 
     def test_append_empty_list(self):
         self.my_list.append(self.my_player_00)
         self.assertFalse(self.my_list.is_empty)
-
 
     def test_append_not_empty_list(self):
         """
@@ -78,7 +75,6 @@ class TestPlayerList(unittest.TestCase):
         self.my_list.append(self.my_player_01)
         self.assertIsNotNone(self.my_list._head.next_player)
         self.assertIsNone(self.my_list._tail.next_player)
-
 
     def test_prepend_head(self):
         """

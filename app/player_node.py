@@ -28,32 +28,27 @@ class PlayerNode:
         A unique key that identifies the player object within the node. Typically derived
         from the player's unique identifier.
     """
+
     def __init__(self, player):
         self._player = player
         self._next = None
         self._previous = None
 
-
     @property
     def player(self):
         return self._player
-
-
 
     @property
     def next_player(self):
         return self._next
 
-
     @property
     def previous_player(self):
         return self._previous
 
-
     @property
     def node_key(self):
         return self._player.uid
-
 
     def set_next(self, next_player_node):
         """
@@ -70,7 +65,6 @@ class PlayerNode:
         """
         self._next = next_player_node
 
-
     def set_previous(self, previous_player_node):
         """
         Sets the previous node for a player node in a linked structure. This method
@@ -83,7 +77,6 @@ class PlayerNode:
             The node to be set as the previous node of the current player node.
         """
         self._previous = previous_player_node
-
 
     def __str__(self):
         return (f'PlayerNode:\n'

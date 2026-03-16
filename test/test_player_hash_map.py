@@ -1,5 +1,3 @@
-
-
 """
 Unit tests for validating the functionality of the PlayerHashMap class.
 
@@ -8,7 +6,6 @@ PlayerHashMap methods.
 """
 
 import unittest
-
 
 from app.player import Player
 from app.player_hash_map import PlayerHashMap
@@ -47,14 +44,11 @@ class TestPlayerHashMap(unittest.TestCase):
         self.assertEqual(len(self.my_hash_map), 1)
         self.assertEqual(self.my_hash_map['1'].name, 'Updated Marcos')
 
-
-
     def test_delitem_removes_player(self):
         self.my_hash_map['1'] = 'Marcos'
         self.my_hash_map['2'] = 'Socram'
         del self.my_hash_map['1']
         self.assertEqual(len(self.my_hash_map), 1)
-
 
     def test_len_hash_map_with_multiple_players(self):
         self.my_hash_map['1'] = 'Marcos'
