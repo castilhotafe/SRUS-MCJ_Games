@@ -1,4 +1,5 @@
 import unittest
+import random
 from app.player import Player
 
 
@@ -59,3 +60,11 @@ class TestPlayer(unittest.TestCase):
         ]
         self.assertEqual(sorted_players,expected_players)
         self.assertNotEqual(players[0],expected_players[0])
+
+    def test_sort_players_scaled(self):
+        players = [Player(f'{i:03}','Player {i}', score=random.randint(0, 1000)) for i in range(1000)]
+
+        builtin_sorted = sorted(players, reverse=True)
+
+        custom_sort = Player.sort_players(players)
+        self.assertEqual(builtin_sorted, custom_sort)
