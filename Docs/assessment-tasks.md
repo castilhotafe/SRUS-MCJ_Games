@@ -172,7 +172,7 @@ Your output here
 ##### 4.3.4.1 Question: why did the equality comparison fail?
 Why did the test fail (note: if it doesn't fail, it means there is something you have already done before you were asked to do so - if that's the case, you need to figure out what that is!)?
 -------
-> Answer here
+> It should have failed if the __eq__ magic method was not implemented. However, I've implemented this method preiously to be able to test deleting a player for its key in the LinkedList
 >
 -------
 Add the necessary code to the Player class to ensure that the `test_sort_players` test passes.

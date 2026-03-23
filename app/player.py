@@ -67,7 +67,8 @@ class Player:
         return self.hash(self.uid)
 
     def __eq__(self, other):
-        return self.uid == other.uid
+        return self.uid == other.uid and self.score == other.score
+
 
     def __lt__(self, other):
         return self.score < other.score

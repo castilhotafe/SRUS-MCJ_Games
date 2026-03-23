@@ -32,6 +32,6 @@ class TestPlayer(unittest.TestCase):
         bob = Player('02','Bob', score=5)
 
         # Add the appropriate expression to the following assert test
-        self.assertTrue(alice == bob, "score not equals")
+        self.assertTrue(alice != bob, "score not equals")
         # or, event better
         self.assertLess(bob, alice)
