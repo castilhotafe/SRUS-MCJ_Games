@@ -26,9 +26,10 @@ class Player:
         The name of the player.
     """
 
-    def __init__(self, uid: str, name: str):
+    def __init__(self, uid: str, name: str, score=0):
         self._uid = uid
         self._name = name
+        self._score = score
 
     @property
     def uid(self):
@@ -43,6 +44,17 @@ class Player:
     @name.setter
     def name(self, new_name: str):
         self._name = new_name
+
+    @property
+    def score(self):
+        return self._score
+
+    @score.setter
+    def score(self, new_score):
+        if new_score < 0:
+            raise ValueError("Score can only be non-negative integers")
+        self._score = new_score
+
 
     @classmethod
     def hash(cls, key: str) -> int:
@@ -59,3 +71,6 @@ class Player:
 
     def __str__(self):
         return f'Player id: {self.uid}\n Name: {self.name}'
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}(name = {self.name}, uid = {self.uid} score = {self.score}"
