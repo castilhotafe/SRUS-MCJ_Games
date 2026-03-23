@@ -69,6 +69,9 @@ class Player:
     def __eq__(self, other):
         return self.uid == other.uid
 
+    def __lt__(self, other):
+        return self.score < other.score
+
     def __str__(self):
         return f'Player id: {self.uid}\n Name: {self.name}'
 
