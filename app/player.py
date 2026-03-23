@@ -63,12 +63,29 @@ class Player:
             total_value += ord(char)
         return total_value
 
+    @classmethod
+    def sort_players(cls, player_list):
+        if len(player_list) <= 1:
+            return player_list
+        pivot = player_list[0]
+        left = []
+        right = []
+        for player in player_list[1:]:
+            if player > pivot:
+                left.append(player)
+            else:
+                right.append(player)
+        return (
+            cls.sort_players(left)
+            + [pivot]
+            + cls.sort_players(right)
+        )
+
     def __hash__(self):
         return self.hash(self.uid)
 
     def __eq__(self, other):
         return self.uid == other.uid and self.score == other.score
-
 
     def __lt__(self, other):
         return self.score < other.score

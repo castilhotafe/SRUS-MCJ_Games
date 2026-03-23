@@ -35,3 +35,27 @@ class TestPlayer(unittest.TestCase):
         self.assertTrue(alice != bob, "score not equals")
         # or, event better
         self.assertLess(bob, alice)
+
+    def test_custom_sort_players(self):
+        marcus = Player('01','Marcus')
+        sarcus = Player('02', 'Sarcus', 20)
+        rascum = Player('3', 'Rascum', 10)
+        urksam = Player('07', 'Urksam', 15)
+
+        players = [
+            marcus,
+            sarcus,
+            rascum,
+            urksam
+        ]
+
+        sorted_players = Player.sort_players(players)
+
+        expected_players = [
+            sarcus,
+            urksam,
+            rascum,
+            marcus
+        ]
+        self.assertEqual(sorted_players,expected_players)
+        self.assertNotEqual(players[0],expected_players[0])

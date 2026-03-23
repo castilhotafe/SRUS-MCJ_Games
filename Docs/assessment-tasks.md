@@ -215,8 +215,9 @@ def sort_quickly(arr):
 
 What is the expected time and space complexity of the above algorithm? You can answer using big O or in plain English but in both cases you MUST justify your answer.
 
-> Answer here
-
+> This algorithm works by repeatedly splitting the list into smaller parts based on a pivot. Each time the function runs, it goes through all elements in the list to compare them with the pivot and place them into two new lists.
+>In terms of space, the algorithm creates new lists at each step, which means it uses extra memory proportional to the size of the input, resulting in a space complexity of O(n).
+> 
 ### 5.2. Task: Implement the custom sorting algorithm
 
 #### 5.2.1. Create a new method in the Player class
@@ -230,7 +231,23 @@ Add a separate test case to `test_player.py` to test your custom sorting algorit
 Include your code below:
 
 ```python
-# YOUR CUSTOM Sorting here
+@classmethod
+    def sort_players(cls, player_list):
+        if len(player_list) <= 1:
+            return player_list
+        pivot = player_list[0]
+        left = []
+        right = []
+        for player in player_list[1:]:
+            if player > pivot:
+                left.append(player)
+            else:
+                right.append(player)
+        return (
+            cls.sort_players(left)
+            + [pivot]
+            + cls.sort_players(right)
+        )
 ```
 
 #### 5.2.3. Success criteria
