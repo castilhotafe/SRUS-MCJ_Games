@@ -62,9 +62,16 @@ class TestPlayer(unittest.TestCase):
         self.assertNotEqual(players[0],expected_players[0])
 
     def test_sort_players_scaled(self):
-        players = [Player(f'{i:03}','Player {i}', score=random.randint(0, 1000)) for i in range(1000)]
+        players = [Player(f'{i:03}',f'Player {i}', score=random.randint(0, 1000)) for i in range(1000)]
 
         builtin_sorted = sorted(players, reverse=True)
 
         custom_sort = Player.sort_players(players)
         self.assertEqual(builtin_sorted, custom_sort)
+
+    def test_sort_players_list_already_sorted(self):
+        players = [Player(f'{i:03}',f'Player {i}', score=random.randint(0, 1000)) for i in range(1000)]
+        sorted_players = sorted(players,reverse=True)
+
+        custom_sort = Player.sort_players(sorted_players)
+        self.assertEqual(sorted_players,custom_sort)

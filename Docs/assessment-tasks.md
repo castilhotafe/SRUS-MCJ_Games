@@ -306,7 +306,7 @@ Create a test case that tries to sort 1000 players that are already sorted.
 If you get a failure, include the failure below:
 
 ```text
-YOUR FAILURE HERE
+>RecursionError: maximum recursion depth exceeded
 ```
 
 ##### 5.3.4.1 Question: Why does the algorithm fail on presorted values?
