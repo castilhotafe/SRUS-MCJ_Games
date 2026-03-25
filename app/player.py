@@ -67,17 +67,21 @@ class Player:
     def sort_players(cls, player_list):
         if len(player_list) <= 1:
             return player_list
-        pivot = player_list[0]
+        middle = len(player_list) // 2
+        pivot = player_list[middle]
         left = []
         right = []
-        for player in player_list[1:]:
+        equal = []
+        for player in player_list:
             if player > pivot:
                 left.append(player)
-            else:
+            elif player < pivot:
                 right.append(player)
+            else:
+                equal.append(player)
         return (
             cls.sort_players(left)
-            + [pivot]
+            + equal
             + cls.sort_players(right)
         )
 
@@ -89,6 +93,9 @@ class Player:
 
     def __lt__(self, other):
         return self.score < other.score
+
+    def __gt__(self, other):
+        return self.score > other.score
 
     def __str__(self):
         return f'Player id: {self.uid}\n Name: {self.name}'

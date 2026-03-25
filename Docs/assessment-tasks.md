@@ -215,9 +215,8 @@ def sort_quickly(arr):
 
 What is the expected time and space complexity of the above algorithm? You can answer using big O or in plain English but in both cases you MUST justify your answer.
 
-> This algorithm works by repeatedly splitting the list into smaller parts based on a pivot. Each time the function runs, it goes through all elements in the list to compare them with the pivot and place them into two new lists.
->In terms of space, the algorithm creates new lists at each step, which means it uses extra memory proportional to the size of the input, resulting in a space complexity of O(n).
-> 
+>Time complexity is O(n log n) on average because the list is divided into smaller parts at each level and all elements are processed across those levels and in the worst case it becomes O(n²) when the pivot does not split the list evenly.
+>Space complexity is O(n) because new lists are created during each partitioning step
 ### 5.2. Task: Implement the custom sorting algorithm
 
 #### 5.2.1. Create a new method in the Player class
@@ -315,13 +314,38 @@ Provide a reason why this test failed (if you got a recursion errors, you need t
 
 If your implementation did not fail, you must nevertheless explain why the senior developers algorithm has worse space complexity for presorted values.
 
-> Answer here
+> When I tested the algorithm with a list that was already sorted I realized that choosing the first element as the pivot
+> does not really split the list, because all the other elements go to one side, 
+> so each recursive call only removes one item and keeps almost the same list size. I started thinking of it like a stack of clothes already ordered
+> from biggest to smallest, where picking the first item does not divide the pile, but just removes one item at a time
+> so the recursion keeps going deeper without finishing until it reaches recursion limit. I also noticed that when the pivot is in the middle, 
+> each recursive call divides the data into smaller parts, so the algorithm reaches small lists faster and starts returning instead of stacking too many recursive calls
 
 Propose a fix to your sorting algorithm that fixes this issue.
 
 ```python
-# YOUR FIX HERE
-# Highlight what the fix was
+@classmethod
+    def sort_players(cls, player_list):
+        if len(player_list) <= 1:
+            return player_list
+        middle = len(player_list) // 2
+        pivot = player_list[middle]
+        left = []
+        right = []
+        equal = []
+        for player in player_list:
+            if player > pivot:
+                left.append(player)
+            elif player < pivot:
+                right.append(player)
+            else:
+                equal.append(player)
+        return (
+            cls.sort_players(left)
+            + equal
+            + cls.sort_players(right)
+        )
+#now the pivot divides the lists and smaller parts returning a result before reaching maximum recursion depth
 ```
 
 #### 5.3.5. Success criteria
