@@ -137,3 +137,107 @@ class TestPlayerBST(unittest.TestCase):
         self.assertEqual(self.my_bst.root.player, self.my_player_04)
         self.assertIsNone(self.my_bst.root.left)
         self.assertIsNone(self.my_bst.root.right)
+
+    def test_search_empty_tree_returns_none(self):
+        """
+        Tests searching in an empty Binary Search Tree.
+
+        This test ensures that searching for any name in an empty tree
+        returns None.
+
+        Raises
+        ------
+        AssertionError
+            If the search does not return None for an empty tree.
+        """
+        result = self.my_bst.search("Ana")
+        self.assertIsNone(result)
+
+    def test_search_root_node(self):
+        """
+        Tests searching for a player that is the root node.
+
+        This test ensures that if the searched name matches the root,
+        the correct Player is returned.
+
+        Raises
+        ------
+        AssertionError
+            If the root player is not returned correctly.
+        """
+        self.my_bst.insert(self.my_player_00)
+        result = self.my_bst.search("Marcos")
+        self.assertEqual(result, self.my_player_00)
+
+    def test_search_left_subtree(self):
+        """
+        Tests searching for a player in the left subtree.
+
+        This test ensures that if the searched name is smaller than the root,
+        the search continues in the left subtree.
+
+        Raises
+        ------
+        AssertionError
+            If the player in the left subtree is not found correctly.
+        """
+        self.my_bst.insert(self.my_player_00)
+        self.my_bst.insert(self.my_player_01)
+
+        result = self.my_bst.search("Ana")
+        self.assertEqual(result, self.my_player_01)
+
+    def test_search_right_subtree(self):
+        """
+        Tests searching for a player in the right subtree.
+
+        This test ensures that if the searched name is greater than the root,
+        the search continues in the right subtree.
+
+        Raises
+        ------
+        AssertionError
+            If the player in the right subtree is not found correctly.
+        """
+        self.my_bst.insert(self.my_player_00)
+        self.my_bst.insert(self.my_player_02)
+
+        result = self.my_bst.search("Zeca")
+        self.assertEqual(result, self.my_player_02)
+
+    def test_search_deeper_node(self):
+        """
+        Tests searching for a player deeper in the tree.
+
+        This test ensures that the search continues recursively through
+        multiple levels until the correct Player is found.
+
+        Raises
+        ------
+        AssertionError
+            If the player is not found correctly in deeper levels.
+        """
+        self.my_bst.insert(self.my_player_00)
+        self.my_bst.insert(self.my_player_01)
+        self.my_bst.insert(self.my_player_03)
+
+        result = self.my_bst.search("Carlos")
+        self.assertEqual(result, self.my_player_03)
+
+    def test_search_non_existing_returns_none(self):
+        """
+        Tests searching for a player that does not exist.
+
+        This test ensures that the search returns None when the name
+        is not found in the tree.
+
+        Raises
+        ------
+        AssertionError
+            If the search does not return None for a missing player.
+        """
+        self.my_bst.insert(self.my_player_00)
+        self.my_bst.insert(self.my_player_01)
+
+        result = self.my_bst.search("Pedro")
+        self.assertIsNone(result)
