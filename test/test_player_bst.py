@@ -37,6 +37,10 @@ class TestPlayerBST(unittest.TestCase):
             Player object with ID "4" and name "Carlos".
         my_player_04 : Player
             Player object with ID "5" and name "Marcos".
+        my_player_05 : Player
+            Player object with ID "6" and name "Bruno".
+        my_player_06 : Player
+            Player object with ID "7" and name "Daniel".
         my_bst : PlayerBST
             An initialized, empty PlayerBST to be used in tests.
         """
@@ -45,6 +49,8 @@ class TestPlayerBST(unittest.TestCase):
         self.my_player_02 = Player('3', 'Zeca')
         self.my_player_03 = Player('4', 'Carlos')
         self.my_player_04 = Player('5', 'Marcos')
+        self.my_player_05 = Player('6', 'Bruno')
+        self.my_player_06 = Player('7', 'Daniel')
         self.my_bst = PlayerBST()
 
     def test_insert_empty_tree(self):
@@ -241,3 +247,73 @@ class TestPlayerBST(unittest.TestCase):
 
         result = self.my_bst.search("Pedro")
         self.assertIsNone(result)
+
+    def test_to_sorted_list_returns_players_in_name_order(self):
+        """
+        Tests converting the BST into a sorted list of Player objects.
+
+        This test ensures that in-order traversal returns the players
+        sorted by name.
+
+        Raises
+        ------
+        AssertionError
+            If the returned list is not sorted by player name.
+        """
+        self.my_bst.insert(self.my_player_00)  # Marcos
+        self.my_bst.insert(self.my_player_01)  # Ana
+        self.my_bst.insert(self.my_player_02)  # Zeca
+        self.my_bst.insert(self.my_player_03)  # Carlos
+        self.my_bst.insert(self.my_player_05)  # Bruno
+        self.my_bst.insert(self.my_player_06)  # Daniel
+
+        sorted_players = self.my_bst.to_sorted_list()
+        sorted_names = []
+
+        for player in sorted_players:
+            sorted_names.append(player.name)
+
+        self.assertEqual(
+            sorted_names,
+            ["Ana", "Bruno", "Carlos", "Daniel", "Marcos", "Zeca"]
+        )
+
+    def test_balance_creates_balanced_bst_with_middle_player_as_root(self):
+        """
+        Tests balancing the BST from a non-balanced tree.
+
+        This test ensures that:
+        - the tree is rebuilt using the sorted list
+        - the middle player becomes the new root
+        - the search method still works after balancing
+
+        Raises
+        ------
+        AssertionError
+            If the balanced tree root is not correct or search fails after balancing.
+        """
+        self.my_bst.insert(self.my_player_01)
+        self.my_bst.insert(self.my_player_05)
+        self.my_bst.insert(self.my_player_03)
+        self.my_bst.insert(self.my_player_06)
+        self.my_bst.insert(self.my_player_00)
+        self.my_bst.insert(self.my_player_02)
+
+        sorted_players = self.my_bst.to_sorted_list()
+        middle_index = len(sorted_players) // 2
+        middle_player = sorted_players[middle_index]
+
+        # get the expected root name
+        expected_root_name = middle_player.name
+
+        self.my_bst.balance()
+
+        self.assertIsNotNone(self.my_bst.root)
+
+        # check if root is the middle player
+        self.assertEqual(self.my_bst.root.player.name, expected_root_name)
+
+        # check search still works after balancing
+        self.assertEqual(self.my_bst.search("Ana"), self.my_player_01)
+        self.assertEqual(self.my_bst.search("Carlos"), self.my_player_03)
+        self.assertEqual(self.my_bst.search("Zeca"), self.my_player_02)
