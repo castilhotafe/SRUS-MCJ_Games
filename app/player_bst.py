@@ -1,6 +1,14 @@
 """
-References to understand recursion
-better and create algorithm for binary search tree:
+Binary Search Tree implementation for Player objects.
+
+This module defines the PlayerBST class, which stores Player objects
+using player.name as the key. It supports insertion, search,
+in-order traversal, and rebuilding the tree into a balanced structure.
+
+The tree allows efficient searching by name, complementing the
+hash map structure used for UID-based lookup.
+
+References used to understand recursion and BST algorithms:
 
     GeeksforGeeks:
     https://www.geeksforgeeks.org/dsa/insertion-in-binary-search-tree/
@@ -13,6 +21,13 @@ from app.player_bnode import PlayerBNode
 
 
 class PlayerBST:
+    """
+    Binary Search Tree that stores Player objects by player name.
+
+    This class supports insertion, search, in-order traversal,
+    and rebuilding the tree into a balanced BST.
+    """
+
     def __init__(self, root=None):
         self._root = root
 
@@ -176,7 +191,7 @@ class PlayerBST:
         self._in_order(self._root, players)
         return players
 
-    def _in_order(self, node, players):
+    def _in_order(self, node, players: list[Player]):
         """
         Perform an in-order traversal of the BST.
 
@@ -194,7 +209,7 @@ class PlayerBST:
             The list being filled with Player objects in sorted order.
         """
 
-        #base case reached the end of the branch
+        # base case reached the end of the branch
         if node is None:
             return
 
@@ -204,7 +219,7 @@ class PlayerBST:
         # process current node
         players.append(node.player)
 
-        #go to right subtree
+        # go to right subtree
         self._in_order(node.right, players)
 
     def build_balanced_tree(self, players):
